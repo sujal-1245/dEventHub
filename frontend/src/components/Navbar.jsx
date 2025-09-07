@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSun, FaMoon, FaTimes, FaCode } from "react-icons/fa";
+import { FaSun, FaMoon, FaTimes, FaCode, FaBars } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navbar() {
@@ -15,6 +15,7 @@ export default function Navbar() {
     localStorage.getItem("theme") === "dark"
   );
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Theme toggle effect
   useEffect(() => {
@@ -71,57 +72,56 @@ export default function Navbar() {
     <>
       <header className="w-full sticky top-0 z-50 bg-white dark:bg-[#023047] shadow-md transition-colors duration-300">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          {/* Logo + Nav */}
-          <div className="flex items-center gap-8">
-            <Link
-              to="/"
-              className="flex items-center gap-3 text-2xl font-bold text-[#219ebc] dark:text-[#8ecae6] hover:text-[#ffb703] dark:hover:text-[#ffb703] transition"
-            >
-              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#004562] text-white shadow-md">
-                <FaCode className="text-lg" />
-              </div>
-              dEventHub
-            </Link>
+          {/* Logo */}
+          <Link
+            to="/"
+            className="flex items-center gap-3 text-2xl font-bold text-[#219ebc] dark:text-[#8ecae6] hover:text-[#ffb703] dark:hover:text-[#ffb703] transition"
+          >
+            <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#004562] text-white shadow-md">
+              <FaCode className="text-lg" />
+            </div>
+            dEventHub
+          </Link>
 
-            <nav className="hidden md:flex gap-6 text-sm font-medium text-[#023047] dark:text-[#e8f4fa]">
-              {isAdmin ? (
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex gap-6 text-sm font-medium text-[#023047] dark:text-[#e8f4fa]">
+            {isAdmin ? (
+              <Link
+                to="/admin"
+                className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <>
                 <Link
-                  to="/admin"
+                  to="/events"
                   className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
                 >
-                  Dashboard
+                  Events
                 </Link>
-              ) : (
-                <>
-                  <Link
-                    to="/events"
-                    className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
-                  >
-                    Events
-                  </Link>
-                  <Link
-                    to="/EventRecommendations"
-                    onClick={(e) =>
-                      handleProtectedClick(e, "/EventRecommendations")
-                    }
-                    className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
-                  >
-                    Recommendations
-                  </Link>
-                  <Link
-                    to="/ATSResume"
-                    onClick={(e) => handleProtectedClick(e, "/ATSResume")}
-                    className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
-                  >
-                    ATS
-                  </Link>
-                </>
-              )}
-            </nav>
-          </div>
+                <Link
+                  to="/EventRecommendations"
+                  onClick={(e) =>
+                    handleProtectedClick(e, "/EventRecommendations")
+                  }
+                  className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
+                >
+                  Recommendations
+                </Link>
+                <Link
+                  to="/ATSResume"
+                  onClick={(e) => handleProtectedClick(e, "/ATSResume")}
+                  className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
+                >
+                  ATS
+                </Link>
+              </>
+            )}
+          </nav>
 
-          {/* Right side */}
-          <div className="flex items-center gap-4">
+          {/* Right side (Desktop) */}
+          <div className="hidden md:flex items-center gap-4">
             {/* Theme Toggle */}
             <button
               onClick={() => setDarkMode(!darkMode)}
@@ -171,7 +171,132 @@ export default function Navbar() {
               </>
             )}
           </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden text-2xl text-[#023047] dark:text-[#e8f4fa]"
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              className="md:hidden bg-white dark:bg-[#023047] shadow-lg px-6 py-4 space-y-4"
+            >
+              <nav className="flex flex-col gap-4 text-[#023047] dark:text-[#e8f4fa] font-medium">
+                {isAdmin ? (
+                  <Link
+                    to="/admin"
+                    onClick={() => setMenuOpen(false)}
+                    className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
+                  >
+                    Dashboard
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      to="/events"
+                      onClick={() => setMenuOpen(false)}
+                      className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
+                    >
+                      Events
+                    </Link>
+                    <Link
+                      to="/EventRecommendations"
+                      onClick={(e) => {
+                        handleProtectedClick(e, "/EventRecommendations");
+                        setMenuOpen(false);
+                      }}
+                      className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
+                    >
+                      Recommendations
+                    </Link>
+                    <Link
+                      to="/ATSResume"
+                      onClick={(e) => {
+                        handleProtectedClick(e, "/ATSResume");
+                        setMenuOpen(false);
+                      }}
+                      className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
+                    >
+                      ATS
+                    </Link>
+                  </>
+                )}
+              </nav>
+
+              {/* Actions */}
+              <div className="flex flex-col gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                {/* Theme Toggle */}
+                <button
+                  onClick={() => {
+                    setDarkMode(!darkMode);
+                    setMenuOpen(false);
+                  }}
+                  className="p-2 w-fit rounded-full bg-[#8ecae6] dark:bg-[#219ebc] hover:scale-110 transition"
+                >
+                  {darkMode ? (
+                    <FaSun className="text-[#ffb703]" />
+                  ) : (
+                    <FaMoon className="text-[#023047]" />
+                  )}
+                </button>
+
+                {user ? (
+                  <>
+                    <button
+                      onClick={() => {
+                        nav("/profile");
+                        setMenuOpen(false);
+                      }}
+                      className="flex items-center gap-2 px-4 py-2 rounded-md bg-[#51aed9] dark:bg-[#04699b] text-[#023047] dark:text-[#e8f4fa] hover:bg-[#219ebc] dark:hover:bg-[#54c3fb] transition"
+                    >
+                      <img
+                        src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`}
+                        alt="avatar"
+                        className="w-6 h-6 rounded-full"
+                      />
+                      <span>{user.name}</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setMenuOpen(false);
+                      }}
+                      className="px-4 py-2 bg-[#ff4848] text-white rounded-md hover:bg-[#fd330b] transition"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      onClick={() => setMenuOpen(false)}
+                      className="px-4 py-2 text-[#023047] dark:text-[#e8f4fa] hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/register"
+                      onClick={() => setMenuOpen(false)}
+                      className="px-4 py-2 bg-[#ffb703] text-[#023047] rounded-md hover:bg-[#ffc637] transition"
+                    >
+                      Get Started
+                    </Link>
+                  </>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Login Modal */}
