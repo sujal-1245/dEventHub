@@ -116,7 +116,7 @@ const ATSResume = () => {
     {
       title: "Actionable feedback you can trust",
       desc: "Instead of vague scoring, dEventHub ATS gives you specific feedback. Missing keywords? Weak bullet points? Overused jargon? We flag them and provide direct suggestions for improvement so you can revise with confidence.",
-      img: "https://cdn-icons-png.flaticon.com/512/1828/1828884.png",
+      img: "https://www.livecareer.com/lcapp/uploads/2025/02/ats-checker-hero-image.png",
     },
     {
       title: "AI-powered rewriting assistance",
@@ -126,7 +126,7 @@ const ATSResume = () => {
     {
       title: "Comprehensive resume checklist",
       desc: "We don’t just stop at ATS parsing. Our checker reviews 16+ key factors across content, design, and clarity — from grammar and section order to file size, bullet length, and keyword coverage. It’s like having a career coach on demand.",
-      img: "https://cdn-icons-png.flaticon.com/512/3135/3135673.png",
+      img: "https://www.jobhero.com/resources/wp-content/uploads/2024/09/Hero-Graphic.png",
     },
     {
       title: "Guaranteeing ATS compatibility",
