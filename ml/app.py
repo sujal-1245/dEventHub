@@ -33,11 +33,12 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],   # allow everything for now
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # 🔑 Fix: universal OPTIONS handler (for CORS preflight)
 @app.options("/{full_path:path}")
