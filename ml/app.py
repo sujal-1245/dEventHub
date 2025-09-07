@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 import shutil, os, json
 from dotenv import load_dotenv
@@ -38,6 +39,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# 🔑 Fix: universal OPTIONS handler (for CORS preflight)
+@app.options("/{full_path:path}")
+async def preflight_handler(full_path: str):
+    return JSONResponse(content={"message": "preflight OK"})
+
 
 # ---------------- Models ----------------
 class ResumeTemplateRequest(BaseModel):
@@ -49,6 +55,7 @@ class ChatbotRequest(BaseModel):
 class RecommendRequest(BaseModel):
     query: str = ""      # optional search filter
     status: str = "open" # can be "open" or "upcoming"
+
 
 # ---------------- Helper functions ----------------
 def extract_text_from_docx(file_path: str):
@@ -191,6 +198,7 @@ def build_ats_resume(extracted_info: dict, template_name: str) -> bytes:
     pdf.output(buffer)
     buffer.seek(0)
     return buffer.read()
+
 
 # ---------------- Routes ----------------
 @app.post("/resume")
