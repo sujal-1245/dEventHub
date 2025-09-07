@@ -24,7 +24,12 @@ GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 app = FastAPI(title="dEventHub AI/ML Service")
 
 # ---------------- CORS ----------------
-origins = ["http://localhost:5173", "http://127.0.0.1:5173"]
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://eventhub-git-main-sujal-1245s-projects.vercel.app/ATSResume"
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -32,6 +37,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # ---------------- Models ----------------
 class ResumeTemplateRequest(BaseModel):
