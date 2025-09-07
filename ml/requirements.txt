@@ -10,3 +10,7 @@ transformers
 torch
 python-dotenv
 requests
+fpdf
+docx
+PyMuPDF
+fitz

@@ -23,9 +23,10 @@ const Register = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        formData
-      );
+  `${import.meta.env.VITE_NODE_BACKEND_URL}/api/auth/register`,
+  formData
+);
+
 
       localStorage.setItem("userInfo", JSON.stringify(data));
       toast.success("Registration successful!");

@@ -17,7 +17,7 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/events");
+        const { data } = await axios.get(`${import.meta.env.VITE_NODE_BACKEND_URL}/api/events`);
         if (Array.isArray(data)) setEvents(data);
         else if (data && Array.isArray(data.events)) setEvents(data.events);
         else setEvents([]);

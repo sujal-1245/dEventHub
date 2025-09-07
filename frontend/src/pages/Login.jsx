@@ -23,7 +23,10 @@ export default function Login() {
     setLoading(true);
     try {
       const payload = { email, password };
-      const { data } = await axios.post("http://localhost:5000/api/auth/login", payload);
+      const { data } = await axios.post(
+  `${import.meta.env.VITE_NODE_BACKEND_URL}/api/auth/login`,
+  payload
+);
 
       // Save user info
       localStorage.setItem("userInfo", JSON.stringify(data));

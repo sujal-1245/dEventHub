@@ -49,9 +49,12 @@ export default function AdminDashboard() {
     const fetchEvents = async () => {
       setLoading(true);
       try {
-        const eventsResp = await axios.get("http://localhost:5000/api/events", {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        });
+        const eventsResp = await axios.get(
+          `${import.meta.env.VITE_NODE_BACKEND_URL}/api/events`,
+          {
+            headers: token ? { Authorization: `Bearer ${token}` } : {},
+          }
+        );
 
         let evData = eventsResp.data;
         let evArray = [];
@@ -88,11 +91,12 @@ export default function AdminDashboard() {
     const fetchTotalUsers = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/users/count",
+          `${import.meta.env.VITE_NODE_BACKEND_URL}/api/users/count`,
           {
             headers: token ? { Authorization: `Bearer ${token}` } : {},
           }
         );
+
         setTotalUsers(data.totalUsers);
       } catch (err) {
         console.error("Error fetching total users:", err);
@@ -369,11 +373,15 @@ export default function AdminDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-xs text-gray-400">Events</div>
-                  <div className="text-lg font-semibold text-black dark:text-white">{totalEvents}</div>
+                  <div className="text-lg font-semibold text-black dark:text-white">
+                    {totalEvents}
+                  </div>
                 </div>
                 <div>
                   <div className="text-xs text-gray-400">Users</div>
-                  <div className="text-lg font-semibold text-black dark:text-white">{totalUsers}</div>
+                  <div className="text-lg font-semibold text-black dark:text-white">
+                    {totalUsers}
+                  </div>
                 </div>
               </div>
 

@@ -20,7 +20,7 @@ export default function AdminEvents() {
   const [loading, setLoading] = useState(false);
 
   const token = JSON.parse(localStorage.getItem("userInfo"))?.token;
-  const API_URL = "http://localhost:5000/api/events";
+  const API_URL = `${import.meta.env.VITE_NODE_BACKEND_URL}/api/events`;
 
   const fetchEvents = async () => {
     try {
