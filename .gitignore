@@ -1,0 +1,17 @@
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node / React
+node_modules/
+dist/
+build/
+
+# Models & data
+ml/models/
+*.bin
+*.pth
+*.h5

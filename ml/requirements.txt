@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+python-multipart
+pdfminer.six
+python-docx
+transformers
+torch
+python-dotenv
+requests
