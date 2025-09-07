@@ -28,22 +28,17 @@ app = FastAPI(title="dEventHub AI/ML Service")
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://eventhub-git-main-sujal-1245s-projects.vercel.app"
+    "https://eventhub-git-main-sujal-1245s-projects.vercel.app",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # allow everything for now
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-
-# 🔑 Fix: universal OPTIONS handler (for CORS preflight)
-@app.options("/{full_path:path}")
-async def preflight_handler(full_path: str):
-    return JSONResponse(content={"message": "preflight OK"})
 
 
 # ---------------- Models ----------------
