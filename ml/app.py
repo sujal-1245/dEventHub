@@ -28,7 +28,7 @@ app = FastAPI(title="dEventHub AI/ML Service")
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://eventhub-git-main-sujal-1245s-projects.vercel.app",
+    "https://eventhub-git-main-sujal-1245s-projects.vercel.app"  # ✅ only domain, no path
 ]
 
 app.add_middleware(
@@ -38,8 +38,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
 
 # ---------------- Models ----------------
 class ResumeTemplateRequest(BaseModel):
@@ -51,7 +49,6 @@ class ChatbotRequest(BaseModel):
 class RecommendRequest(BaseModel):
     query: str = ""      # optional search filter
     status: str = "open" # can be "open" or "upcoming"
-
 
 # ---------------- Helper functions ----------------
 def extract_text_from_docx(file_path: str):
@@ -195,7 +192,6 @@ def build_ats_resume(extracted_info: dict, template_name: str) -> bytes:
     buffer.seek(0)
     return buffer.read()
 
-
 # ---------------- Routes ----------------
 @app.post("/resume")
 def resume_analysis(file: UploadFile = File(...)):
@@ -247,9 +243,7 @@ def chatbot(req: ChatbotRequest):
 
 @app.post("/recommend")
 def recommend_events(req: RecommendRequest):
-    """
-    Fetch live hackathons/events from Devpost API.
-    """
+    """Fetch live hackathons/events from Devpost API."""
     try:
         url = f"https://devpost.com/api/hackathons?status={req.status}&page=1"
         response = requests.get(url, timeout=10)
