@@ -12,5 +12,5 @@ python-dotenv
 requests
 fpdf
 docx
-PyMuPDF
-fitz
+PyMuPDF>=1.26.0
+
