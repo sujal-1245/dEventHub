@@ -28,7 +28,8 @@ app = FastAPI(title="dEventHub AI/ML Service")
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://eventhub-git-main-sujal-1245s-projects.vercel.app"  # ✅ only domain, no path
+    "https://eventhub-git-main-sujal-1245s-projects.vercel.app",
+    "https://deventhub.vercel.app/"  
 ]
 
 app.add_middleware(
