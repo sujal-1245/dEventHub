@@ -15,6 +15,7 @@ import AdminEvents from "./pages/admin/AdminEvents";
 import Chatbot from "./components/Chatbot";
 import EventRecommendations from "./pages/EventRecommendations";
 import ATSResume from "./pages/ATSResume";
+import Hackinator from "./pages/Hackinator";
 
 // ✅ Protected wrapper
 const Protected = ({ children, adminOnly = false }) => {
@@ -45,6 +46,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/ATSResume" element={<ATSResume />} />
+          <Route path="/Hackinator" element={<Hackinator />} />
           <Route path="/EventRecommendations" element={<EventRecommendations />} />
 
           {/* User profile (protected) */}

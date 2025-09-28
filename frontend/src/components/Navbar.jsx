@@ -80,7 +80,7 @@ export default function Navbar() {
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#004562] text-white shadow-md">
               <FaCode className="text-lg" />
             </div>
-            dEventHub
+            StudentsHub
           </Link>
 
           {/* Desktop Nav */}
@@ -108,6 +108,15 @@ export default function Navbar() {
                   className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
                 >
                   Recommendations
+                </Link>
+                <Link
+                  to="/Hackinator"
+                  onClick={(e) =>
+                    handleProtectedClick(e, "/Hackinator")
+                  }
+                  className="hover:text-[#fb8500] dark:hover:text-[#fb8500] transition"
+                >
+                  Hackinator
                 </Link>
                 <Link
                   to="/ATSResume"
