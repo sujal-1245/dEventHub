@@ -544,7 +544,7 @@ export default function Hackinator() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
 
       <Box
         sx={{
