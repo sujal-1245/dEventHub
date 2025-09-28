@@ -102,14 +102,14 @@ const Chatbot = () => {
             animate={{ opacity: 1, scale: 1, y: -45 }}
             exit={{ opacity: 0, scale: 0.8, y: 150 }}
             transition={{ type: "spring", stiffness: 200, damping: 22 }}
-            className="fixed bottom-20 right-5 w-[22rem] md:w-[28rem] backdrop-blur-xl bg-white/90 border border-gray-300 rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.25)] z-50 overflow-hidden flex flex-col h-[72vh] md:h-[65vh]"
+            className="fixed bottom-20 right-5 w-[22rem] md:w-[28rem] backdrop-blur-xl bg-white/90 border border-gray-300 rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.25)] z-50 overflow-hidden flex flex-col h-[80vh]"
             role="dialog"
             aria-label="EventHub Chatbot"
           >
             {/* Header */}
             <div className="flex items-center justify-between bg-gradient-to-r from-indigo-600 via-blue-600 to-gray-900 text-white px-5 py-3 font-semibold shadow-lg">
               <span className="flex items-center gap-2 text-lg tracking-wide">
-                <FaRobot className="animate-pulse" /> EventHub Chatbot
+                <FaRobot className="animate-pulse" /> Career Assistant
               </span>
               <div className="flex items-center gap-4">
                 <button
