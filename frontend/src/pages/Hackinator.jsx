@@ -598,7 +598,7 @@ export default function Hackinator() {
                   gutterBottom
                   sx={{ mt: 3, color: "#004d40" }}
                 >
-                  Career Akinator
+                  Hackinator
                 </Typography>
 
                 <Box sx={{ width: "100%", my: 3 }}>
